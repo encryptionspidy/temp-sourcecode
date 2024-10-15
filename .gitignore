@@ -1,0 +1,5 @@
+env/
+__pycache__/
+*.pyc
+uploads/    # Optional: Ignore if you don't want uploaded images in the repo
+
