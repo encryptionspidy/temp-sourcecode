@@ -3,14 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obscura - Image Protection</title>
+    <title>Obscura - Privacy Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylish.css') }}">
 </head>
 <body>
-    <h1>Upload an Image for Protection</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*">
-        <input type="submit" value="Upload">
-    </form>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">OBSCURA</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">SERVICE</a></li>
+                    <li><a href="#">DESIGN</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+            </div>
+        </div> 
+
+        <div class="content">
+            <h1>Obscura <br><span>Privacy Tool</span></h1>
+            <p class="par">Protect your digital media with enhanced security and privacy using Obscura.</p>
+
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/incognito.png') }}">    
+            </div>
+
+            <div class="hero">
+                <div class="card">
+                    <h1>User</h1>
+                    <p>@user</p>
+                    <img src="{{ url_for('static', filename='images/profile.png') }}" id="profile-pic">
+
+                    <!-- Image upload form -->
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <label for="input-file">Upload Image</label>
+                        <input type="file" id="input-file" name="image" accept="image/jpeg, image/png, image/jpg">
+                        <input type="submit" value="Upload">
+                    </form>
+
+                    <!-- Flash message -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="message-box">
+                                {% for category, message in messages %}
+                                    <p class="{{ category }}">{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <h3>Contact Us</h3>
+                    <p>Email: jenish@example.com</p>
+                    <p>Phone: +121 56556 565556</p>
+                    <p>Address: Your Address 123 street</p>
+                </div>
+
+                <div class="footer-content">
+                    <h3>Follow Us</h3>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom-bar">
+                <p>&copy; 2024 OBSCURA. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let profilePic = document.getElementById("profile-pic");
+        let inputFile = document.getElementById("input-file");
+
+        inputFile.onchange = function() {
+            profilePic.src = URL.createObjectURL(inputFile.files[0]);
+        }
+    </script>
 </body>
 </html>
 
